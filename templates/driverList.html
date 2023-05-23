@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+  <title>Formula 1 Web App</title>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.min.css') }}">
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css" />
+</head>
+<body>
+
+<div class="container">
+  <nav class="navbar">
+      <h2 class="nav-brand"><img src="https://1000logos.net/wp-content/uploads/2021/06/F1-logo.png" width=""></h2>
+      <ul class="nav-links">
+          <li class="nav-item">
+              <a href="/" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+              <a href="/driverList" class="nav-link">Driver</a>
+          </li>
+          <li class="nav-item">
+              <a href="/teamList" class="nav-link">Team</a>
+          </li>
+          <li class="nav-item">
+              <a href="/compare" class="nav-link">Compare</a>
+          </li>
+      </ul>
+      {% if user_details %}
+      <span class="nav-link"><u>Logged User: {{ user_details['name'] }}</u></span>
+      <button id="sign-out" class="btn btn-danger" hidden="true">Sign out</button>
+      {% else %}
+        <span class="nav-link"></span>
+        <button id="sign-out" class="btn btn-danger" hidden="true">Sign out</button>
+      {% endif %}
+  </nav>
+
+
+    {% if user_details %}
+      <div></div>
+    {% else %}
+      <a href="/" class="btn btn-danger mt-3">Sign In to Add or View Driver</a>
+    {% endif %}
+
+
+  <div class="container">
+    <div class="d-flex mt-3">
+      {% if user_details %}
+        <a href="/add_driver" class="btn btn-success text-white">Add Driver</a>
+      {% else %}
+      {% endif %}
+    </div>
+    <form action="/driverList" class="mb-3" method="POST">
+      <label for="name">Name:</label> <input type="text" value="" name="name"/>&nbsp;
+      <label for="age"> Age:</label> <input type="number" value="" name="age"/>&nbsp;
+      <label for="totalPoles">Total Pole Positions:</label> <input type="number" name="totalPoles"/>&nbsp;
+      <br/><br/>
+
+      <label for="totalRaceWins">Race Wins:</label> <input type="number" value="" name="totalRaceWins"/>&nbsp;
+      <label for="totalPoints">Total Points:</label> <input type="number" value="" name="totalPoints"/>&nbsp;
+      <label for="totalWorldTitles">World Titles:</label> <input type="number" value="" name="totalWorldTitles"/>&nbsp;
+      <br/><br/>
+
+      <label for="totalFastestLaps">Total Fastest Laps:</label> <input type="number" value="" name="totalFastestLaps"/>&nbsp;
+      <label for="team">Team:</label> <input type="text" value="" name="team"/>&nbsp;
+      <input type="submit" class="btn btn-secondary" value="SEARCH" name="search_button"/>
+    </form>
+
+    <table class="table" style="margin:0 auto;">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Age</th>
+          <th scope="col">Pole Positions</th>
+          <th scope="col">Race Wins</th>
+          <th scope="col">Total Points</th>
+          <th scope="col">World Titles</th>
+          <th scope="col">Fastest Laps</th>
+          <th scope="col">Team</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for driver in drivers %}
+        <tr>
+          {% if user_details %}
+            <td><a href="#" onclick="window.location.href='{{ url_for ( 'driver_info_page' , id = driver.id ) }}'">{{ driver['name'] }}</a></td>
+          {% else %}
+            <td>{{ driver['name'] }}</td>
+          {% endif %}
+          <td>{{ driver['age'] }}</td>
+          <td>{{ driver['totalPoles'] }}</td>
+          <td>{{ driver['totalRaceWins'] }}</td>
+          <td>{{ driver['totalPoints'] }}</td>
+          <td>{{ driver['totalWorldTitles'] }}</td>
+          <td>{{ driver['totalFastestLaps'] }}</td>
+          <td>{{ driver['team'] }}</td>
+          <td>
+
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+<script src="{{ url_for('static', filename='app-setup.js') }}"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="{{ url_for('static', filename='/bootstrap/js/bootstrap-min.js') }}"></script>
+
+</body>
+</html>

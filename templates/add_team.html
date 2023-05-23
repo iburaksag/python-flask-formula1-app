@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+
+
+{% block body %}
+
+<div class="container d-flex mt-5">
+ <div class="left-content">
+   <img src="https://www.f1-fansite.com/wp-content/uploads/2020/02/2020-F1-Teams.jpg" alt="" width="432" height="400" style="border-radius:10px;">
+ </div>
+ <div class="right-content">
+   <h4 class="title">Add New Team</h4>
+   <form action="/add_team" class="addTeamForm" method="POST">
+      <div class="formInput form-outline mb-4">
+        <label class="form-label" for="name">Team Name : </label>
+        <input type="text" name="name" id="name" class="form-control" required />
+      </div>
+      <div class="formInput form-outline mb-4">
+        <label class="form-label" for="yearFounded">Year Founded : </label>
+        <input type="text" name="yearFounded" id="yearFounded" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required />
+      </div>
+      <div class="formInput form-outline mb-4">
+        <label class="form-label" for="teamPolePositions">Total Pole Positions : </label>
+        <input type="text" name="teamPolePositions" id="teamPolePositions" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required />
+      </div>
+      <div class="formInput form-outline mb-4">
+        <label class="formInput form-label" for="teamRaceWins">Total Race Wins : </label>
+        <input type="text" name="teamRaceWins" id="teamRaceWins" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required />
+      </div>
+      <div class="formInput form-outline mb-4">
+        <label class="form-label" for="teamTotalTitles">Total Titles : </label>
+        <input type="text" name="teamTotalTitles" id="teamTotalTitles" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required />
+      </div>
+      <div class="formInput form-outline mb-4">
+        <label class="form-label" for="lastYearPosition">Last Year Position : </label>
+        <input type="text" name="lastYearPosition" id="lastYearPosition" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required />
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block mb-4">Save</button>
+  </form>
+ </div>
+</div>
+
+{% endblock %}

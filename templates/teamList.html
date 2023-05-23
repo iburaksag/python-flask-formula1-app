@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+  <title>Formula 1 Web App</title>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.min.css') }}">
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css" />
+</head>
+<body>
+
+<div class="container">
+  <nav class="navbar">
+      <h2 class="nav-brand"><img src="https://1000logos.net/wp-content/uploads/2021/06/F1-logo.png" width=""></h2>
+      <ul class="nav-links">
+          <li class="nav-item">
+              <a href="/" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+              <a href="/driverList" class="nav-link">Driver</a>
+          </li>
+          <li class="nav-item">
+              <a href="/teamList" class="nav-link">Team</a>
+          </li>
+          <li class="nav-item">
+              <a href="/compare" class="nav-link">Compare</a>
+          </li>
+      </ul>
+      {% if user_details %}
+      <span class="nav-link"><u>Logged User: {{ user_details['name'] }}</u></span>
+      <button id="sign-out" class="btn btn-danger" hidden="true">Sign out</button>
+      {% else %}
+        <span class="nav-link"></span>
+        <button id="sign-out" class="btn btn-danger" hidden="true">Sign out</button>
+      {% endif %}
+  </nav>
+
+
+  {% if user_details %}
+    <div></div>
+  {% else %}
+    <a href="/" class="btn btn-danger mt-3">Sign In to Add or View Team</a>
+  {% endif %}
+
+  <div class="container">
+    <div class="d-flex mt-3">
+      {% if user_details %}
+        <a href="/add_team" class="btn btn-secondary text-white">Add Team</a>
+      {% else %}
+      {% endif %}
+    </div>
+    <form action="/teamList" class="mb-3" method="POST">
+      <label for="name"> Name:</label> <input type="text" value="" name="name"/>&nbsp;
+      <label for="yearFounded">Year Founded:</label> <input type="number" min="1800" max="2030" placeholder="1950" name="yearFounded"/>&nbsp;
+      <label for="teamPolePositions">Pole Positions:</label> <input type="number" value="" name="teamPolePositions"/>&nbsp;
+      <br/><br/>
+      <label for="teamRaceWins">Race Wins:</label> <input type="text" value="" name="teamRaceWins"/>&nbsp;
+      <label for="teamTotalTitles">Constructors Titles:</label> <input type="text" value="" name="teamTotalTitles"/>&nbsp;
+      <label for="lastYearPosition">Last Season Position:</label> <input type="number" min="1" max="20" value="" name="lastYearPosition"/>&nbsp;
+      <input type="submit" class="btn btn-secondary" value="SEARCH" name="search_button"/>
+    </form>
+
+    <table class="table" style="margin:0 auto;">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Year Founded</th>
+          <th scope="col">Pole Positions</th>
+          <th scope="col">Race Wins</th>
+          <th scope="col">Constructors Titles</th>
+          <th scope="col">Last Year Position</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for team in teams %}
+        <tr>
+          {% if user_details %}
+          <td><a href="#" onclick="window.location.href='{{ url_for ( 'team_info_page' , id = team.id ) }}'">{{ team.name }}</a></td>
+          {% else %}
+          <td>{{ team.name }}</td>
+          {% endif %}
+          <td>{{ team.yearFounded }}</td>
+          <td>{{ team.teamPolePositions }}</td>
+          <td>{{ team.teamRaceWins }}</td>
+          <td>{{ team.teamTotalTitles }}</td>
+          <td>{{ team.lastYearPosition }}</td>
+          <td>
+
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+<script src="{{ url_for('static', filename='app-setup.js') }}"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="{{ url_for('static', filename='/bootstrap/js/bootstrap-min.js') }}"></script>
+
+</body>
+</html>

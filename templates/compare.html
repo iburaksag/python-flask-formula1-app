@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Compare Page</title>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.min.css') }}">
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css" />
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <h2 class="nav-brand"><img src="https://1000logos.net/wp-content/uploads/2021/06/F1-logo.png" width=""></h2>
+      <ul class="nav-links">
+        <li class="nav-item">
+          <a href="/" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/driverList" class="nav-link">Driver</a>
+        </li>
+        <li class="nav-item">
+          <a href="/teamList" class="nav-link">Team</a>
+        </li>
+        <li class="nav-item">
+          <a href="/compare" class="nav-link">Compare</a>
+        </li>
+      </ul>
+      {% if user_details %}
+      <span class="nav-link"><u>Logged User: {{ user_details['name'] }}</u></span>
+      <button id="sign-out" class="btn btn-danger" hidden="true">Sign out</button>
+      {% else %}
+      <span class="nav-link"></span>
+      <button id="sign-out" class="btn btn-danger" hidden="true">Sign out</button>
+      {% endif %}
+    </nav>
+
+    <div class="container d-flex mt-3" style="margin:0 auto;">
+
+      <div class="divCompareTeams">
+        <div class="compTeamsGroup">
+          <form action="/compare_teams" class="compareTeamsForm" method="POST">
+
+            <label class="form-label" for="team1">Team 1 : </label>
+            <select name="team1" class="form-control w-50 mx-auto" id="team1">
+              {% for team in teams %}
+              <option id="{{ team.name }}" name="{{ team.name }}" SELECTED>{{ team.name }}</option>
+              {% endfor %}
+            </select>
+
+            <label class="form-label mt-3" for="team2">Team 2 : </label>
+            <select name="team2" class="form-control w-50 mx-auto" id="team2">
+              {% for team in teams %}
+              <option id="{{ team.name }}" name="{{ team.name }}" SELECTED>{{ team.name }}</option>
+              {% endfor %}
+            </select>
+
+            <button type="submit" class="btn btn-success mt-3">Compare Teams</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="divCompareDrivers">
+        <div class="compDriversGroup">
+          <form action="/compare_drivers" class="compareDriversForm" method="POST">
+
+            <label class="form-label" for="driver1">Driver 1 : </label>
+            <select name="driver1" class="form-control w-50 mx-auto" id="driver1">
+              {% for driver in drivers  %}
+              <option id="{{ driver.name }}" name="{{ driver.name }}" SELECTED>{{ driver.name }}</option>
+              {% endfor %}
+            </select>
+
+            <label class="form-label mt-3" for="driver2">Driver 2 : </label>
+            <select name="driver2" class="form-control w-50 mx-auto" id="driver2">
+              {% for driver in drivers %}
+              <option id="{{ driver.name }}" name="{{ driver.name }}" SELECTED>{{ driver.name }}</option>
+              {% endfor %}
+            </select>
+
+            <button type="submit" class="btn btn-primary mt-3">Compare Drivers</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+  <script src="{{ url_for('static', filename='app-setup.js') }}"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="{{ url_for('static', filename='/bootstrap/js/bootstrap-min.js') }}"></script>
+
+</body>
+
+</html>

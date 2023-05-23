@@ -1,0 +1,23 @@
+indexes:
+- kind: TeamInfo
+  properties:
+  - name: id
+  - name: name
+  - name: yearFounded
+  - name: teamPolePositions
+  - name: teamRaceWins
+  - name: teamTotalTitles
+  - name: lastYearPosition
+  - name: driver_list
+
+- kind: DriverInfo
+  properties:
+  - name: id
+  - name: name
+  - name: age
+  - name: totalPoles
+  - name: totalRaceWins
+  - name: totalPoints
+  - name: totalWorldTitles
+  - name: totalFastestLaps
+  - name: team

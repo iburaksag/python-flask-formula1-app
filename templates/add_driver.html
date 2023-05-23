@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+
+
+{% block body %}
+
+<div class="container d-flex mt-5">
+ <div class="left-content">
+   <img src="https://www.formula1.com/content/dam/fom-website/manual/Misc/2022manual/WinterMarch/WinterTestingBahrain/GettyImages-1239068645.jpg" alt="" width="432" height="400" style="border-radius:10px;">
+ </div>
+ <div class="right-content">
+   <h4 class="title">Add New Driver</h4>
+    <form action="/add_driver" class="addDriverForm" method="POST">
+      <div class="formInput form-outline mb-4">
+        <label class="form-label" for="name">Driver Name : </label>
+        <input type="text" name="name" id="name" class="form-control" required/>
+      </div>
+      <div class="formInput form-outline mb-4">
+        <label class="form-label" for="age">Age : </label>
+        <input type="text" name="age" id="age" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required/>
+      </div>
+      <div class="formInput form-outline mb-4">
+        <label class="form-label" for="totalPoles">Total Pole Positions : </label>
+        <input type="text" name="totalPoles" id="totalPoles" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required/>
+      </div>
+      <div class="formInput form-outline mb-4">
+        <label class="formInput form-label" for="totalRaceWins">Total Race Wins : </label>
+        <input type="text" name="totalRaceWins" id="totalRaceWins" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required/>
+      </div>
+      <div class="formInput form-outline mb-4">
+        <label class="form-label" for="totalPoints">Total Points : </label>
+        <input type="text" name="totalPoints" id="totalPoints" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required/>
+      </div>
+      <div class="formInput form-outline mb-4">
+        <label class="form-label" for="totalWorldTitles">Total World Titles : </label>
+        <input type="text" name="totalWorldTitles" id="totalWorldTitles" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required/>
+      </div>
+      <div class="formInput form-outline mb-4">
+        <label class="form-label" for="totalFastestLaps">Total Fastest Laps : </label>
+        <input type="text" name="totalFastestLaps" id="totalFastestLaps" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required/>
+      </div>
+      <div class="formInput form-outline mb-4">
+        <label class="form-label" for="team">Team Drive For : </label>
+        <select name="team" class="form-control" id="team">
+          {% if teams %}
+              {% for team in teams %}
+                <option id="{{ team.name }}" name="{{ team.name }}" SELECTED>{{ team.name }}</option>
+              {% endfor %}
+          {% else %}
+            <option></option>
+          {% endif %}
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block mb-4">Save</button>
+  </form>
+ </div>
+</div>
+
+{% endblock %}

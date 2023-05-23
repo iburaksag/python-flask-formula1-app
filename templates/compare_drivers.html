@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Compare Drivers Page</title>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.min.css') }}">
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css" />
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <h2 class="nav-brand"><img src="https://1000logos.net/wp-content/uploads/2021/06/F1-logo.png" width=""></h2>
+      <ul class="nav-links">
+        <li class="nav-item">
+          <a href="/" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/driverList" class="nav-link">Driver</a>
+        </li>
+        <li class="nav-item">
+          <a href="/teamList" class="nav-link">Team</a>
+        </li>
+        <li class="nav-item">
+          <a href="/compare" class="nav-link">Compare</a>
+        </li>
+      </ul>
+      {% if user_details %}
+      <span class="nav-link"><u>Logged User: {{ user_details['name'] }}</u></span>
+      <button id="sign-out" class="btn btn-danger" hidden="true">Sign out</button>
+      {% else %}
+      <span class="nav-link"></span>
+      <button id="sign-out" class="btn btn-danger" hidden="true">Sign out</button>
+      {% endif %}
+    </nav>
+
+    <div class="container d-flex mt-3" style="margin:0 auto;">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col" style="color:blue;">{{ first_driver.name }}</th>
+            <th scope="col" style="color:blue;">{{ second_driver.name }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Age</th>
+            {% if first_driver.age < second_driver.age %}
+              <td style="background-color: green;">{{ first_driver.age }}</td>
+              <td>{{ second_driver.age }}</td>
+            {% elif first_driver.age > second_driver.age %}
+              <td>{{ first_driver.age }}</td>
+              <td style="background-color: green;">{{ second_driver.age }}</td>
+            {% else %}
+            <td style="background-color: orange;">{{ first_driver.age }}</td>
+            <td style="background-color: orange;">{{ second_driver.age }}</td>
+            {% endif %}
+          </tr>
+          <tr>
+            <th scope="row">Total Poles</th>
+            {% if first_driver.totalPoles > second_driver.totalPoles %}
+              <td style="background-color: green;">{{ first_driver.totalPoles }}</td>
+              <td>{{ second_driver.totalPoles }}</td>
+            {% elif first_driver.totalPoles < second_driver.totalPoles %}
+              <td>{{ first_driver.totalPoles }}</td>
+              <td style="background-color: green;">{{ second_driver.totalPoles }}</td>
+            {% else %}
+            <td style="background-color: orange;">{{ first_driver.totalPoles }}</td>
+            <td style="background-color: orange;">{{ second_driver.totalPoles }}</td>
+            {% endif %}
+          </tr>
+          <tr>
+            <th scope="row">Total Race Wins</th>
+            {% if first_driver.totalRaceWins > second_driver.totalRaceWins %}
+              <td style="background-color: green;">{{ first_driver.totalRaceWins }}</td>
+              <td>{{ second_driver.totalRaceWins }}</td>
+            {% elif first_driver.totalRaceWins < second_driver.totalRaceWins %}
+              <td>{{ first_driver.totalRaceWins }}</td>
+              <td style="background-color: green;">{{ second_driver.totalRaceWins }}</td>
+            {% else %}
+            <td style="background-color: orange;">{{ first_driver.totalRaceWins }}</td>
+            <td style="background-color: orange;">{{ second_driver.totalRaceWins }}</td>
+            {% endif %}
+          </tr>
+          <tr>
+            <th scope="row">Total World Titles</th>
+            {% if first_driver.totalWorldTitles > second_driver.totalWorldTitles %}
+              <td style="background-color: green;">{{ first_driver.totalWorldTitles }}</td>
+              <td>{{ second_driver.totalWorldTitles }}</td>
+            {% elif first_driver.totalWorldTitles < second_driver.totalWorldTitles %}
+              <td>{{ first_driver.totalWorldTitles }}</td>
+              <td style="background-color: green;">{{ second_driver.totalWorldTitles }}</td>
+            {% else %}
+            <td style="background-color: orange;">{{ first_driver.totalWorldTitles }}</td>
+            <td style="background-color: orange;">{{ second_driver.totalWorldTitles }}</td>
+            {% endif %}
+          </tr>
+          <tr>
+            <th scope="row">Total Fastest Laps</th>
+            {% if first_driver.totalFastestLaps > second_driver.totalFastestLaps %}
+              <td style="background-color: green;">{{ first_driver.totalFastestLaps }}</td>
+              <td>{{ second_driver.totalFastestLaps }}</td>
+            {% elif first_driver.totalFastestLaps < second_driver.totalFastestLaps %}
+              <td>{{ first_driver.totalFastestLaps }}</td>
+              <td style="background-color: green;">{{ second_driver.totalFastestLaps }}</td>
+            {% else %}
+            <td style="background-color: orange;">{{ first_driver.totalFastestLaps }}</td>
+            <td style="background-color: orange;">{{ second_driver.totalFastestLaps }}</td>
+            {% endif %}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+  <script src="{{ url_for('static', filename='app-setup.js') }}"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="{{ url_for('static', filename='/bootstrap/js/bootstrap-min.js') }}"></script>
+
+</body>
+
+</html>

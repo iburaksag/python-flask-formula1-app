@@ -1,0 +1,120 @@
+body {
+  font-family: 'Ubuntu', sans-serif;
+  text-align: center;
+  background-color: whitesmoke;
+}
+
+
+/*NAVIGATION BAR*/
+.navbar {
+    background: #855FF6;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem!important;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.nav-brand > img {
+  width: 153px;
+  height: 86px;
+}
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin-top: 16px!important;
+}
+
+.nav-item:not(:first-of-type) {
+    margin-left: 1.5em;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.nav-btn {
+    height: fit-content;
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/*ADD DRIVER*/
+.left-content {
+  display: flex;
+  flex: 0.4;
+}
+.right-content {
+  flex: 0.6;
+}
+
+.right-content .title {
+  display: inline-block;
+  margin-bottom: 20px;
+  border: 1px solid black;
+  padding: 10px 40px;
+}
+
+.addDriverForm .formInput {
+  display: flex;
+  align-items: center;
+  justify-content:space-around;
+}
+
+.addDriverForm .formInput label {
+  flex: 0.3;
+}
+
+.addDriverForm .formInput input, select{
+  flex: 0.7;
+}
+
+.addDriverForm button{
+  width: 10%;
+  float: right;
+}
+
+/*ADD TEAM*/
+
+.addTeamForm .formInput {
+  display: flex;
+  align-items: center;
+  justify-content:space-around;
+}
+
+.addTeamForm .formInput label {
+  flex: 0.3;
+}
+
+.addTeamForm .formInput input{
+  flex: 0.7;
+}
+
+.addTeamForm button{
+  width: 10%;
+  float: right;
+}
+
+/*Filter*/
+.inline-field label {
+  display: flex;
+}
+
+.inline-field input[type=checkbox] {
+  display: flex;
+  margin: 0 auto;
+  width: 20px;
+  height: 20px;
+}
+
+/*Compare*/
+.divCompareTeams, .divCompareDrivers {
+  flex: 1;
+}
