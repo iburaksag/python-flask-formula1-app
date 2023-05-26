@@ -1,6 +1,6 @@
 # Python Flask Formula1 App
 In this assignment I built a PaaS application which will be a database that stores information about F1 drivers and teams. I had required to deal with users who login and logout. This will function a little like Wikipedia in that anyone who is logged in can change anything, anyone who is logged out can change nothing.<br><br>
-In this application users should be able to add and update drivers and teams that are in the database. They should also be able to perform comparisons of either teams or drivers. Also, some filtering actions has been implemented. With filtering however you will be limited on the types of queries you can perform due to the NoSQL nature of the database.
+In this application users should be able to add and update drivers and teams that are in the database. They should also be able to perform comparisons of either teams or drivers. Also, some filtering actions has been implemented. With filtering however you will be limited on the types of queries you can perform due to the NoSQL nature of the database. Please check the Assignment folder for more details.
 
 ## Available Scripts
 
